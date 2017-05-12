@@ -1,28 +1,41 @@
 package crunch.kevin.springmvc.javabean;
 
 public class Cart {
-	
-	private int CustomerNumber;
-	private String ProductNumberList;
-	private int ProductCount;
 
+	private int cartCode;
+	private int customerNumber;
+	private String productNumberList;
+	private int productCount;
+	private double price;
+	public int getCartCode() {
+		return cartCode;
+	}
+	public void setCartCode(int cartCode) {
+		this.cartCode = cartCode;
+	}
 	public int getCustomerNumber() {
-		return CustomerNumber;
+		return customerNumber;
 	}
 	public void setCustomerNumber(int customerNumber) {
-		CustomerNumber = customerNumber;
+		this.customerNumber = customerNumber;
 	}
 	public String getProductNumberList() {
-		return ProductNumberList;
+		return productNumberList;
 	}
 	public void setProductNumberList(String productNumberList) {
-		ProductNumberList = productNumberList;
+		this.productNumberList = productNumberList;
 	}
 	public int getProductCount() {
-		return ProductCount;
+		return productCount;
 	}
 	public void setProductCount(int productCount) {
-		ProductCount = productCount;
+		this.productCount = productCount;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 }

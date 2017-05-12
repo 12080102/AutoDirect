@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import crunch.kevin.springmvc.dao.CustomerDao;
 import crunch.kevin.springmvc.javabean.Customer;
 import crunch.kevin.springmvc.javabean.CustomerInfo;
+import crunch.kevin.springmvc.javabean.LoginUser;
 import crunch.kevin.springmvc.javabean.Product;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -26,8 +27,8 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public Customer getCustomerbyName(int code) {
-		String sql = "select * from customerlogin where customerCode = ?";
+	public Customer getCustomerbyCode(int code) {
+		String sql = "select * from customerlogin where customerNubmer = ?";
 		final Customer pro = new Customer();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.query(sql, new Object[] { code },
@@ -42,8 +43,8 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public CustomerInfo getCustomerInfobyName(int code) {
-		String sql = "select * from customers where customerCode = ?";
+	public CustomerInfo getCustomerInfobyCode(int code) {
+		String sql = "select * from customers where customerName = ?";
 		final CustomerInfo pro = new CustomerInfo();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.query(sql, new Object[] { code },
@@ -187,5 +188,60 @@ public class CustomerDaoImpl implements CustomerDao {
 			product.add(pro);
 		}
 		return product;
+	}
+
+	@Override
+	public int checklogin(LoginUser c) {
+		// TODO Auto-generated method stub
+		int i1,i2;
+		String sql = "select count(*) from customerlogin where customerName = ? and customerPW = ?";
+		String sql2 = "select count(*) from employeelogin where email=? and employeePW=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		i1 = jdbcTemplate.queryForObject(sql,new Object[]{c.getName(),c.getPassword()} ,Integer.class);
+		if(i1==1)
+			return 1; //customer login
+		else{
+			i2 = jdbcTemplate.queryForObject(sql2,new Object[]{c.getName(),c.getPassword()} , Integer.class);
+			if(i2==1)
+				return 2;  //employee login
+			else
+				return 0;  //login failed
+		}
+	}
+	@Override
+	public int checkloginUser(String user) {
+		// TODO Auto-generated method stub
+		int i1,i2;
+		String sql = "select count(*) from customerlogin where customerName = ?";
+		String sql2 = "select count(*) from employeelogin where email=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		i1 = jdbcTemplate.queryForObject(sql,new Object[]{user} ,Integer.class);
+		System.out.println("i:"+i1);
+		if(i1==1)
+			return 1; //customer login
+		else{
+			i2 = jdbcTemplate.queryForObject(sql2,new Object[]{user} , Integer.class);
+			if(i2==1)
+				return 2;  //employee login
+			else
+				return 0;  //login failed
+		}
+	}
+
+	@Override
+	public Customer getCustomerbyName(String name) {
+		// TODO Auto-generated method stub
+		String sql = "select * from customerlogin where customerName = ?";
+		final Customer pro = new Customer();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.query(sql, new Object[] { name },
+				new RowCallbackHandler() {
+					public void processRow(ResultSet rs) throws SQLException {
+						pro.setName(rs.getString("customerName"));
+						pro.setCustomerPW(rs.getString("customerPW"));
+						pro.setCustomerNumber(rs.getInt("customerNumber"));
+					}
+				});
+		return pro;
 	}
 }

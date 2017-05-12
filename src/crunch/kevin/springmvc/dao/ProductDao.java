@@ -20,4 +20,8 @@ public interface ProductDao {
 	public int getProductsCount(String type);
 	
 	public void addURl(String type, int c);
+	
+	public List<Product> getRandomProducts();
+	
+	public List<Product> getProductsforIndex(String type);
 }

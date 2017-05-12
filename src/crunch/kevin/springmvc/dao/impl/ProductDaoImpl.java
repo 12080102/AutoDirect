@@ -34,7 +34,8 @@ public class ProductDaoImpl implements ProductDao {
 			Product pro = new Product();
 			pro.setProductCode(String.valueOf(row.get("productCode")));
 			pro.setProductName(String.valueOf(row.get("productName")));
-			pro.setProductLine((String) row.get("productLine"));
+			pro.setProductLine((String)row.get("productLine"));
+			pro.setProductScale((String)row.get("productScale"));
 			pro.setProductVendor(String.valueOf(row.get("productVendor")));
 			pro.setProductDescription(String.valueOf(row
 					.get("productDescription")));
@@ -95,6 +96,68 @@ public class ProductDaoImpl implements ProductDao {
 			pro.setProductCode(String.valueOf(row.get("productCode")));
 			pro.setProductName(String.valueOf(row.get("productName")));
 			pro.setProductLine((String) row.get("productLine"));
+			pro.setProductScale((String)row.get("productScale"));
+			pro.setProductVendor(String.valueOf(row.get("productVendor")));
+			pro.setProductDescription(String.valueOf(row
+					.get("productDescription")));
+			pro.setQuantityInStock((Integer) row.get("quantityInStock"));
+			pro.setBuyPrice(row.get("buyPrice").toString());
+			pro.setMSRP(row.get("MSRP").toString());
+			pro.setPicurl((String)row.get("picUrl"));
+			product.add(pro);
+		}
+		return product;
+	}
+	public List<Product> getProductsforIndex(String type) {
+		// TODO Auto-generated method stub
+		String sql = "select * from products where 1=1 ";
+		switch (type) {
+		case "Classic Cars":
+			sql += "and productLine='Classic Cars'";
+			System.out.println("Classic Cars");
+			break;
+		case "Motorcycles":
+			sql += "and productLine='Motorcycles'";
+			System.out.println("Motorcycles");
+			break;
+		case "Planes":
+			sql += "and productLine='Planes'";
+			System.out.println("Planes");
+			break;
+		case "Ships":
+			sql += "and productLine='Ships'";
+			System.out.println("1");
+			break;
+		case "Trucks and Buses":
+			sql += "and productLine='Trucks and Buses'";
+			System.out.println("2");
+			break;
+		case "Vintage Cars":
+			sql += "and productLine='Vintage Cars'";
+			System.out.println("3");
+			break;
+		case "Boats":
+			sql += "and productLine='Boats'";
+			System.out.println("4");
+			break;
+		case "Trains":
+			sql += "and productLine='Trains'";
+			System.out.println("Trains");
+			break;
+		default:
+			System.out.println("5");
+			break;
+		}
+		sql+=" limit 4";
+		List<Product> product = new ArrayList<Product>();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Map<String, Object>> proRows = jdbcTemplate.queryForList(sql);
+		for (Map<String, Object> row : proRows) {
+			Product pro = new Product();
+			pro.setProductCode(String.valueOf(row.get("productCode")));
+			pro.setProductName(String.valueOf(row.get("productName")));
+			pro.setProductLine((String) row.get("productLine"));
+			pro.setProductScale((String)row.get("productScale"));
 			pro.setProductVendor(String.valueOf(row.get("productVendor")));
 			pro.setProductDescription(String.valueOf(row
 					.get("productDescription")));
@@ -119,6 +182,7 @@ public class ProductDaoImpl implements ProductDao {
 						pro.setProductCode(rs.getString("productCode"));
 						pro.setProductName(rs.getString("productName"));
 						pro.setProductLine(rs.getString("productLine"));
+						pro.setProductScale(rs.getString("productScale"));
 						pro.setProductVendor(rs.getString("productVendor"));
 						pro.setProductDescription(rs
 								.getString("productDescription"));
@@ -186,6 +250,7 @@ public class ProductDaoImpl implements ProductDao {
 			pro.setProductCode(String.valueOf(row.get("productCode")));
 			pro.setProductName(String.valueOf(row.get("productName")));
 			pro.setProductLine((String) row.get("productLine"));
+			pro.setProductScale((String)row.get("productScale"));
 			pro.setProductVendor(String.valueOf(row.get("productVendor")));
 			pro.setProductDescription(String.valueOf(row
 					.get("productDescription")));
@@ -290,5 +355,46 @@ public class ProductDaoImpl implements ProductDao {
 		sql += "update products set picUrl = 'image/cars/classiccars/"+c+1+".jpg' where productCode = (select * from temp ); ";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql,new Object[]{c});
+	}
+
+	@Override
+	public List<Product> getRandomProducts() {
+		// TODO Auto-generated method stub
+		String sql = "select * from products order by ";
+		int c = (int) (Math.random()*3);
+		switch (c) {
+		case 1:
+			sql += "productDescription";
+			break;
+		case 2:
+			sql += "productName";
+			break;
+		case 0:
+			sql += "productVendor";
+			break;
+		default:
+			sql += "productName";
+			break;
+		}
+		sql += " limit 6";
+		List<Product> product = new ArrayList<Product>();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Map<String, Object>> proRows = jdbcTemplate.queryForList(sql);
+		for (Map<String, Object> row : proRows) {
+			Product pro = new Product();
+			pro.setProductCode(String.valueOf(row.get("productCode")));
+			pro.setProductName(String.valueOf(row.get("productName")));
+			pro.setProductLine((String) row.get("productLine"));
+			pro.setProductScale((String)row.get("productScale"));
+			pro.setProductVendor(String.valueOf(row.get("productVendor")));
+			pro.setProductDescription(String.valueOf(row
+					.get("productDescription")));
+			pro.setQuantityInStock((Integer) row.get("quantityInStock"));
+			pro.setBuyPrice(row.get("buyPrice").toString());
+			pro.setMSRP(row.get("MSRP").toString());
+			pro.setPicurl((String)row.get("picUrl"));
+			product.add(pro);
+		}
+		return product;
 	}
 }

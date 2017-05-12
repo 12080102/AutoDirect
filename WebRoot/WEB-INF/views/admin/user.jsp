@@ -243,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</span>
 						</div> <!-- /input-group -->
 					</li>
-					<li><a href="helloworld?name=admin"><i
+					<li><a href="helloworld2?name=admin"><i
 							class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
 					<li><a href="admin/user"><i
 							class="fa fa-bar-chart-o fa-fw"></i> User Management</a></li>

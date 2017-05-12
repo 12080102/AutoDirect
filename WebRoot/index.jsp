@@ -12,8 +12,10 @@
 	<div class="container">
 		<form class="form-signin" role="form" action="helloworld">
 			<h2 class="form-signin-heading">Login</h2>
-			<input type="text" name="name" class="form-control"
+			<input type="text" name="name" class="form-control" value="Atelier graphique"
 				placeholder="Username here" required autofocus>
+			<input type="password" name="password" class="form-control" value="123"
+				placeholder="Password here" required autofocus>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 		</form>
