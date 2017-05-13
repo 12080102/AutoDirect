@@ -24,9 +24,9 @@ public class OrdersDaoImpl implements OrdersDao {
 	}
 
 	@Override
-	public void newOrder(Orders order) {
+	public int newOrder(final Orders order) {
 		// TODO Auto-generated method stub
-		String sql = "insert into order(orderDate,requiredDate,shippedDate,status,comments,customerNumber) values(?,?,?,?,?,?)";
+		String sql = "insert into orders(orderDate,requiredDate,shippedDate,status,comments,customerNumber) values(?,?,?,?,?,?)";
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 		try {
 			jdbc.update(
@@ -35,16 +35,26 @@ public class OrdersDaoImpl implements OrdersDao {
 							order.getRequiredDate(), order.getShippedDate(),
 							order.getStatus(), order.getComments(),
 							order.getCustomerNumber() });
+			String id = "SELECT LAST_INSERT_ID()";
+			jdbc.query(id, new RowCallbackHandler() {
+				
+				@Override
+				public void processRow(ResultSet rs) throws SQLException {
+					// TODO Auto-generated method stub
+					order.setOrderNumber(rs.getInt(1));
+				}
+			});
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return order.getOrderNumber();
 	}
 
 	@Override
 	public void updateOrder(Orders order) {
 		// TODO Auto-generated method stub
-		String sql = "update order set orderDate=?,requiredDate=?,shippedDate=?,status=?,comments=?,customerNumber=? where orderNumber=?";
+		String sql = "update orders set orderDate=?,requiredDate=?,shippedDate=?,status=?,comments=?,customerNumber=? where orderNumber=?";
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 		try {
 			jdbc.update(
@@ -128,6 +138,28 @@ public class OrdersDaoImpl implements OrdersDao {
 		List<Orders> order = new ArrayList<>();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Map<String, Object>> proRows = jdbcTemplate.queryForList(sql);
+		for (Map<String, Object> rs : proRows) {
+			Orders o = new Orders();
+			o.setOrderNumber((Integer) rs.get("orderNumber"));
+			o.setOrderDate((Date) rs.get("orderDate"));
+			o.setRequiredDate((Date) rs.get("requiredDate"));
+			o.setShippedDate((Date) rs.get("shippedDate"));
+			o.setStatus((String) rs.get("status"));
+			o.setComments((String) rs.get("comments"));
+			o.setCustomerNumber((Integer) rs.get("customerNumber"));
+			order.add(o);
+		}
+		return order;
+	}
+
+	@Override
+	public List<Orders> getOrdersbyStatus(String status) {
+		// TODO Auto-generated method stub
+		String sql = "select * from orders where status = ?";
+		List<Orders> order = new ArrayList<>();
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		List<Map<String, Object>> proRows = jdbcTemplate.queryForList(sql,
+				new Object[] { status });
 		for (Map<String, Object> rs : proRows) {
 			Orders o = new Orders();
 			o.setOrderNumber((Integer) rs.get("orderNumber"));

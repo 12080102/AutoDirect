@@ -4,12 +4,15 @@ import java.util.List;
 
 import crunch.kevin.springmvc.javabean.Customer;
 import crunch.kevin.springmvc.javabean.CustomerInfo;
+import crunch.kevin.springmvc.javabean.LoginUser;
 
 public interface CustomerDao {
 
-	public Customer getCustomerbyName(int code);
+	public Customer getCustomerbyCode(int code);
 	
-	public CustomerInfo getCustomerInfobyName(int code);
+	public Customer getCustomerbyName(String name);
+	
+	public CustomerInfo getCustomerInfobyCode(int code);
 	
 	public void updateCustomer(Customer customer);
 	
@@ -20,5 +23,10 @@ public interface CustomerDao {
 	public void addCustomerInfo(CustomerInfo customerInfo);
 	
 	public List<Customer> getAllCustomer();
+	
 	public List<CustomerInfo> getAllCustomerInfo();
+	
+	public int checklogin(LoginUser c);
+	
+	public int checkloginUser(String user);
 }

@@ -57,15 +57,10 @@
 				</div>
 				<div class="span6">
 					<div class="pull-right">
-						<a href="product_summary.html"><span class="">Fr</span></a> <a
-							href="product_summary.html"><span class="">Es</span></a> <span
-							class="btn btn-mini">En</span> <a href="product_summary.html"><span>&pound;</span></a>
-						<span class="btn btn-mini">$155.00</span> <a
-							href="product_summary.html"><span class="">$</span></a> <a
-							href="product_summary.html"><span
+						<a href="shopping/checkcart?user=${user.name}"><span
 							class="btn btn-mini btn-primary"><i
-								class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your
-								cart </span> </a>
+								class="icon-shopping-cart icon-white"></i> [ ${cartitem} ] Items
+								in your cart </span> </a>
 					</div>
 				</div>
 			</div>
@@ -76,23 +71,23 @@
 					class="icon-bar"></span> <span class="icon-bar"></span>
 				</a>
 				<div class="navbar-inner">
-					<a class="brand" href="helloworld?name=${user.name}"><img
+					<a class="brand" href="helloworld2?name=${user.name}"><img
 						src="themes/images/logo.png" alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post"
 						action="products.html">
 						<input id="srchFld" class="srchTxt" type="text" /> <select
 							class="srchTxt">
 							<option>All</option>
-							<option>CLOTHES</option>
-							<option>FOOD AND BEVERAGES</option>
-							<option>HEALTH & BEAUTY</option>
-							<option>SPORTS & LEISURE</option>
-							<option>BOOKS & ENTERTAINMENTS</option>
+							<option>CARS</option>
+							<option>MOTORCYCLES</option>
+							<option>WATER VEHICALS</option>
+							<option>TRAINS</option>
+							<option>TRUCKS & BUSSES</option>
+							<option>PLAINS</option>
 						</select>
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="special_offer.html">Specials Offer</a></li>
 						<li class=""><a href="normal.html">Delivery</a></li>
 						<li class=""><a href="contact.html">Contact</a></li>
 						<li class=""><a href="#login" role="button"
@@ -134,17 +129,23 @@
 		<div class="container">
 			<div class="row">
 				<!-- Sidebar ================================================== -->
-			<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
-		<ul id="sideManu" class="nav nav-tabs nav-stacked">
+				<div id="sidebar" class="span3">
+					<div class="well well-small">
+						<a id="myCart" href="shopping/checkcart?user=${user.name}"><img
+							src="themes/images/ico-cart.png" alt="cart">${cartitem}
+							Items in your cart <span class="badge badge-warning pull-right">$${cartprice}</span></a>
+					</div>
+					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 
 						<li class="subMenu"><a> CARS [${pc.cars }]</a>
 							<ul style="display:none">
 								<li><a class="active"
 									href="type/classiccars?name=${user.name}"><i
-										class="icon-chevron-right"></i>Classic Cars (${pc.classicCars}) </a></li>
+										class="icon-chevron-right"></i>Classic Cars
+										(${pc.classicCars}) </a></li>
 								<li><a href="type/vintagecars?name=${user.name}"><i
-										class="icon-chevron-right"></i> Vintage Cars (${pc.vintageCars})</a></li>
+										class="icon-chevron-right"></i> Vintage Cars
+										(${pc.vintageCars})</a></li>
 							</ul></li>
 
 						<li><a href="type/motorcycles?name=${user.name}">MOTORCYCLES
@@ -157,21 +158,24 @@
 								<li><a href="type/boats?name=${user.name}"><i
 										class="icon-chevron-right"></i> Boats (${pc.boats})</a></li>
 							</ul></li>
-						<li><a href="type/trains?name=${user.name}">TRAINS [${pc.trains}]</a></li>
+						<li><a href="type/trains?name=${user.name}">TRAINS
+								[${pc.trains}]</a></li>
 						<li><a href="type/truckbus?name=${user.name}">TRUCKS ANS
 								BUSSES [${pc.truckandbus}]</a></li>
-						<li><a href="type/plains?name=${user.name}">PLAINS [${pc.plains}]</a></li>
+						<li><a href="type/plains?name=${user.name}">PLAINS
+								[${pc.plains}]</a></li>
 					</ul>
 					<br />
-		  
-		 
-			<div class="thumbnail">
-				<img src="themes/images/payment_methods.png" title="Bootshop Payment Methods" alt="Payments Methods">
-				<div class="caption">
-				  <h5>Payment Methods</h5>
+
+
+					<div class="thumbnail">
+						<img src="themes/images/payment_methods.png"
+							title="Bootshop Payment Methods" alt="Payments Methods">
+						<div class="caption">
+							<h5>Payment Methods</h5>
+						</div>
+					</div>
 				</div>
-			  </div>
-	</div>
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
@@ -205,55 +209,60 @@
 					<br class="clr" />
 					<div class="tab-content">
 						<div class="tab-pane" id="listView">
-						<c:forEach var="list" items="${lp}">
-							<div class="row">
-								<div class="span2">
-									<img src="${list.picurl}" alt="" />
-								</div>
-								<div class="span4">
-									<h4>New | Available</h4>
-									<hr class="soft" />
-									<h5>${list.productName }</h5>
-									<p>${list.productDescription }</p>
-									<a class="btn btn-small pull-right" href="views/client/product_details.jsp">View
-										Details</a> <br class="clr" />
-								</div>
-								<div class="span3 alignR">
-									<form class="form-horizontal qtyFrm">
-										<h3>${list.buyPrice }</h3>
-										<br /> <a href="product_details.html"
-											class="btn btn-large btn-primary"> Add to <i
-											class=" icon-shopping-cart"></i></a> <a
-											href="product_details.html" class="btn btn-large"><i
-											class="icon-zoom-in"></i></a>
+							<c:forEach var="list" items="${lp}">
+								<div class="row">
+									<div class="span2">
+										<img src="${list.picurl}" alt="" />
+									</div>
+									<div class="span4">
+										<h4>New | Available</h4>
+										<hr class="soft" />
+										<h5>${list.productName }</h5>
+										<p>${list.productDescription }</p>
+										<a class="btn btn-small pull-right"
+											href="shopping/getdetail?name=${user.name }&code=${list.productCode}">View
+											Details</a> <br class="clr" />
+									</div>
+									<div class="span3 alignR">
+										<form class="form-horizontal qtyFrm">
+											<h3>$${list.buyPrice }</h3>
+											<br /> <a href="shopping/addcart?user=${user.name }&code=${list.productCode}&qty=1"
+											class="btn btn-large btn-primary">
+												Add to <i class=" icon-shopping-cart"></i>
+											</a> <a
+												href="shopping/getdetail?name=${user.name }&code=${list.productCode}"
+												class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
-									</form>
+										</form>
+									</div>
 								</div>
-							</div>
-							<hr class="soft" />
+								<hr class="soft" />
 							</c:forEach>
-							
+
 						</div>
 
 						<div class="tab-pane  active" id="blockView">
 							<ul class="thumbnails">
-							<c:forEach var="list" items="${lp}">
-								<li class="span3">
-									<div class="thumbnail">
-										<a href="product_details.html"><img
-											src="${list.picurl}" alt="" /></a>
-										<div class="caption">
-											<h5>${list.productName }</h5>
-											<!-- <p>${list.productDescription }</p> -->
-											<h4 style="text-align: center">
-												<a class="btn" href="product_details.html"> <i
-													class="icon-zoom-in"></i></a> <a class="btn" href="#">Add
-													to <i class="icon-shopping-cart"></i>
-												</a> <a class="btn btn-primary" href="#">&euro;${list.buyPrice }</a>
-											</h4>
+								<c:forEach var="list" items="${lp}">
+									<li class="span3">
+										<div class="thumbnail">
+											<a
+												href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
+												src="${list.picurl}" alt="" /></a>
+											<div class="caption">
+												<h5>${list.productName }</h5>
+												<!-- <p>${list.productDescription }</p> -->
+												<h4 style="text-align: center">
+													<a class="btn"
+														href="shopping/getdetail?name=${user.name }&code=${list.productCode}">
+														<i class="icon-zoom-in"></i>
+													</a> <a class="btn" href="shopping/addcart?user=${user.name }&code=${list.productCode}&qty=1">Add to <i
+														class="icon-shopping-cart"></i>
+													</a> <a class="btn btn-primary" href="#">$${list.buyPrice }</a>
+												</h4>
+											</div>
 										</div>
-									</div>
-								</li>
+									</li>
 								</c:forEach>
 							</ul>
 							<hr class="soft" />
@@ -305,8 +314,8 @@
 					<a href="#"><img width="60" height="60"
 						src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>
 					<a href="#"><img width="60" height="60"
-						src="themes/images/twitter.png" title="twitter" alt="twitter" /></a> <a
-						href="#"><img width="60" height="60"
+						src="themes/images/twitter.png" title="twitter" alt="twitter" /></a>
+					<a href="#"><img width="60" height="60"
 						src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
 				</div>
 			</div>
