@@ -11,9 +11,13 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/classicmodels?useUnicode=true&amp;characterEncoding=UTF-8" />
+			value="jdbc:mysql://10.0.0.13:3306/classicmodels?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="kevin" />
 		<property name="password" value="admin" />
+		<!-- <property name="url"
+			value="jdbc:mysql://mydb.clrq4eslsgyw.us-east-1.rds.amazonaws.com:3306/classicmodels?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="myuser" />
+		<property name="password" value="11111111" /> -->
 	</bean>
 
 	<!--user -->

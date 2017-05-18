@@ -91,10 +91,9 @@
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="special_offer.html">Specials Offer</a></li>
 						<li class=""><a href="normal.html">Delivery</a></li>
 						<li class=""><a href="contact.html">Contact</a></li>
-						<li class=""><a href="#login" role="button"
+						<li class=""><a href="index.html" role="button"
 							data-toggle="modal" style="padding-right:0"><span
 								class="btn btn-large btn-success">Login</span></a>
 							<div id="login" class="modal hide fade in" tabindex="-1"
@@ -158,8 +157,7 @@
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href=""><img
-							src="themes/images/carousel/10.png" alt="" /></a>
+						<a href=""><img src="themes/images/carousel/10.png" alt="" /></a>
 						<div class="carousel-caption">
 							<h4>Second Thumbnail label</h4>
 							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -171,8 +169,7 @@
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href=""><img
-							src="themes/images/carousel/11.png" alt="" /></a>
+						<a href=""><img src="themes/images/carousel/11.png" alt="" /></a>
 						<div class="carousel-caption">
 							<h4>Second Thumbnail label</h4>
 							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -184,8 +181,7 @@
 				</div>
 				<div class="item">
 					<div class="container">
-						<a href=""><img
-							src="themes/images/carousel/12.png" alt="" /></a>
+						<a href=""><img src="themes/images/carousel/12.png" alt="" /></a>
 						<div class="carousel-caption">
 							<h4>Second Thumbnail label</h4>
 							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -206,9 +202,9 @@
 				<!-- Sidebar ================================================== -->
 				<div id="sidebar" class="span3">
 					<div class="well well-small">
-						<a id="myCart" href="product_summary.html"><img
-							src="themes/images/ico-cart.png" alt="cart">3 Items in your
-							cart <span class="badge badge-warning pull-right">$155.00</span></a>
+						<a id="myCart" href="shopping/checkcart?user=${user.name}"><img
+							src="themes/images/ico-cart.png" alt="cart">${cartitem}
+							Items in your cart <span class="badge badge-warning pull-right">$${cartprice}</span></a>
 					</div>
 					<ul id="sideManu" class="nav nav-tabs nav-stacked">
 
@@ -266,13 +262,15 @@
 											<c:forEach var="list" items="${lp1}">
 												<li class="span3">
 													<div class="thumbnail">
-														<i class="tag"></i> <a href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
+														<i class="tag"></i> <a
+															href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
 															src="${list.picurl}" alt=""></a>
 														<div class="caption">
 															<h5>${list.productName}</h5>
 															<h4>
-																<a class="btn" href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a> <span
-																	class="pull-right">$${list.buyPrice }</span>
+																<a class="btn"
+																	href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a>
+																<span class="pull-right">$${list.buyPrice }</span>
 															</h4>
 														</div>
 													</div>
@@ -285,13 +283,15 @@
 											<c:forEach var="list" items="${lp2}">
 												<li class="span3">
 													<div class="thumbnail">
-														<i class="tag"></i> <a href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
+														<i class="tag"></i> <a
+															href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
 															src="${list.picurl}" alt=""></a>
 														<div class="caption">
 															<h5>${list.productName}</h5>
 															<h4>
-																<a class="btn" href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a> <span
-																	class="pull-right">$${list.buyPrice }</span>
+																<a class="btn"
+																	href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a>
+																<span class="pull-right">$${list.buyPrice }</span>
 															</h4>
 														</div>
 													</div>
@@ -304,13 +304,15 @@
 											<c:forEach var="list" items="${lp3}">
 												<li class="span3">
 													<div class="thumbnail">
-														<i class="tag"></i> <a href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
+														<i class="tag"></i> <a
+															href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
 															src="${list.picurl}" alt=""></a>
 														<div class="caption">
 															<h5>${list.productName}</h5>
 															<h4>
-																<a class="btn" href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a> <span
-																	class="pull-right">$${list.buyPrice }</span>
+																<a class="btn"
+																	href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a>
+																<span class="pull-right">$${list.buyPrice }</span>
 															</h4>
 														</div>
 													</div>
@@ -323,13 +325,15 @@
 											<c:forEach var="list" items="${lp4}">
 												<li class="span3">
 													<div class="thumbnail">
-														<i class="tag"></i> <a href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
+														<i class="tag"></i> <a
+															href="shopping/getdetail?name=${user.name }&code=${list.productCode}"><img
 															src="${list.picurl}" alt=""></a>
 														<div class="caption">
 															<h5>${list.productName}</h5>
 															<h4>
-																<a class="btn" href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a> <span
-																	class="pull-right">$${list.buyPrice }</span>
+																<a class="btn"
+																	href="shopping/getdetail?name=${user.name }&code=${list.productCode}">VIEW</a>
+																<span class="pull-right">$${list.buyPrice }</span>
 															</h4>
 														</div>
 													</div>
@@ -359,7 +363,7 @@
 											<a class="btn"
 												href="shopping/getdetail?name=${user.name }&code=${list.productCode}">
 												<i class="icon-zoom-in"></i>
-											</a> <a class="btn" href="#">Add to <i
+											</a> <a class="btn" href="shopping/addcart?user=${user.name }&code=${list.productCode}&qty=1">Add to <i
 												class="icon-shopping-cart"></i>
 											</a> <a class="btn btn-primary" href="#">$${list.buyPrice }</a>
 										</h4>
@@ -379,7 +383,7 @@
 			<div class="row">
 				<div class="span3">
 					<h5>ACCOUNT</h5>
-					<a href="login.html">YOUR ACCOUNT</a> <a href="login.html">PERSONAL
+					<a href="login.html">YOUR ACCOUNT</a> <a href="index.html">PERSONAL
 						INFORMATION</a> <a href="login.html">ADDRESSES</a> <a
 						href="login.html">DISCOUNT</a> <a href="login.html">ORDER
 						HISTORY</a>
